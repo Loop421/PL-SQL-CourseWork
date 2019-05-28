@@ -59,6 +59,58 @@ end;
 
 execute find_flight('JFK', 'China', '05-DEC-18');
 
+create sequence reser_seq
+    start with 6
+    increment by 1
+    cache 100;
+
+set serveroutput on
+create or replace procedure make_a_reservation
+(
+    p_custid in reservation.custid%type,
+    p_flightid in reservation.flightid%type,
+    p_seats in reservation.numberofseat%type
+)
+is
+
+    v_numseats flight.numberofseatremaining%type;
+
+begin
+    
+    
+    select numberofseatremaining into v_numseats
+    from flight
+    where flightid = p_flightid;
+    
+    if(v_numseats - p_seats > 0) then
+        insert into reservation values(reser_seq.nextval,p_custid,p_flightid,p_seats);
+        update_remainingseats(p_seats, p_flightid);
+        dbms_output.put_line('The customer ' || p_custid || ' has made a reservation on flight ' 
+        || p_flightid || ' with ' || p_seats || ' seats confirmed');
+    else
+    dbms_output.put_line('No more seats');
+    end if;
+end;
+
+set serveroutput on
+create or replace procedure update_remainingseats
+(
+    p_seats in reservation.numberofseat%type,
+    p_flightid in reservation.flightid%type
+)
+
+is 
+    v_numseats flight.numberofseatremaining%type;
+begin
+    
+    
+    update flight
+    set numberofseatremaining = numberofseatremaining - p_seats
+    where flightid = p_flightid;
+    
+
+end;
+
 set serveroutput on
 
 CREATE OR REPLACE PROCEDURE view_reservation
