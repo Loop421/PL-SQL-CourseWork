@@ -20,10 +20,6 @@ end;
 
 execute register_customer('Ania T', '399 Jay st', 'Brooklyn', 'NY', '123-345-6543');
 
-select * from flight;
-
-select * from reservation;
-
 set serveroutput on
 
 CREATE OR REPLACE PROCEDURE find_flight
