@@ -66,12 +66,6 @@ create table Reservation
     CONSTRAINT fk_flight FOREIGN KEY (flightID) REFERENCES flight(flightID)
 );
 
-select * from customer;
-select * from flight;
-select * from employee;
-select * from reservation;
-
-drop table employee;
 
 insert into customer values( CUST_SEQ.nextval,'Ashwin S','300 Jay st', 'Brooklyn', 'NY','111-222-3333');
 insert into customer values( CUST_SEQ.nextval,'Mirabelle Bend','0 Sunnyside Center', 'Fort Worth', 'TX','817-257-6582');
@@ -119,7 +113,6 @@ INSERT INTO donor VALUES (23456,'Susan Ash', '21 Main St', 'Fall River' , 'MA', 
 INSERT INTO donor VALUES (33333,'Nancy Taylor', '26 Oak St', 'Fall River' , 'MA', 02720, '04-MAR-92', 50, 'John Adams');
 INSERT INTO donor VALUES (34567,'Robert Brooks', '36 Pine St', 'Fall River' , 'MA', 02720, '04-APR-98', 50, 'Amy Costa');
 
-select * from donor;
 
 
 set serveroutput on
